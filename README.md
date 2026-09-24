@@ -2,11 +2,6 @@
 
 This repository contains the monolithic backend REST API for an online store. We build it with **Laravel** and **PostgreSQL**.
 
-> [!NOTE]
-> **Active Development**
-> The repository's `main` branch contains the clean base scaffold.
-> We are currently actively developing the authentication flow on the `feature/auth` branch. If you are starting new work, please check with the team on which branch to base your work.
-
 ## Architecture and Technology Stack
 *   **Framework:** PHP / Laravel
 *   **Database:** PostgreSQL
@@ -31,6 +26,30 @@ This repository contains the monolithic backend REST API for an online store. We
 *   Create and retrieve orders.
 *   Decrease inventory when a user creates an order.
 *   *Critical:* The system must create orders and update inventory in one ACID database transaction. This prevents oversold stock.
+
+## Repository Structure
+
+We use the standard Laravel folder structure. Here is a list of the most important folders and their purposes:
+
+*   **`app/`**: This folder contains the core application code.
+    *   **`app/Http/Controllers/`**: Put your API logic here. These files process the web requests.
+    *   **`app/Models/`**: Put your database models here. These files connect to the database.
+*   **`routes/`**: This folder contains the web route files.
+    *   **`routes/api.php`**: Put your API endpoints here. (You must create this file before you add endpoints).
+*   **`database/`**: This folder contains the database files.
+    *   **`database/migrations/`**: Put your database table structures here.
+    *   **`database/seeders/`**: Put your test data here.
+*   **`tests/`**: Put your automated tests here.
+*   **`config/`**: This folder contains all the configuration files for the application.
+
+## How to Start Development
+
+To start new work, follow these steps:
+
+1.  Open `routes/api.php` to add a new API endpoint.
+2.  Create a new controller in `app/Http/Controllers/` to process the request.
+3.  Create a new model in `app/Models/` if you must save data to the database.
+4.  Write a test in the `tests/` folder to make sure that your code works.
 
 ## Team Onboarding
 
