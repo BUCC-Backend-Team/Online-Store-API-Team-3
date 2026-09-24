@@ -51,4 +51,22 @@ class AuthController extends Controller
             'token' => $token,
         ]);
     }
+
+    public function me()
+    {
+        return response()->json([
+            'success' => true,
+            'user' => auth('api')->user(),
+        ]);
+    }
+
+    public function logout()
+    {
+        auth('api')->logout();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Successfully logged out'
+        ]);
+    }
 }

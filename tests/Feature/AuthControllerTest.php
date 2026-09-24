@@ -77,4 +77,35 @@ class AuthControllerTest extends TestCase
                      'message' => 'Invalid credentials'
                  ]);
     }
+
+    public function test_user_can_get_their_profile(): void
+    {
+        $user = \App\Models\User::factory()->create();
+        $token = auth('api')->login($user);
+
+        $response = $this->withToken($token)->getJson('/api/v1/auth/me');
+
+        $response->assertStatus(200)
+                 ->assertJson([
+                     'success' => true,
+                     'user' => [
+                         'id' => $user->id,
+                         'email' => $user->email,
+                     ]
+                 ]);
+    }
+
+    public function test_user_can_logout(): void
+    {
+        $user = \App\Models\User::factory()->create();
+        $token = auth('api')->login($user);
+
+        $response = $this->withToken($token)->postJson('/api/v1/auth/logout');
+
+        $response->assertStatus(200)
+                 ->assertJson([
+                     'success' => true,
+                     'message' => 'Successfully logged out'
+                 ]);
+    }
 }
