@@ -87,6 +87,17 @@ Follow these steps to start the project locally:
    ./vendor/bin/sail artisan jwt:secret
    ```
 
+## Shared Scaffold (What's Already Built)
+
+To speed up development, the core foundation required by the System Design plan is already built on `main`:
+
+1. **API Versioning:** All routes in `routes/api.php` are automatically prefixed with `/api/v1/`.
+2. **JWT Authentication:** The `api` guard is configured to use JWT. The `User` model is fully prepared. You can use `auth('api')->user()` to retrieve the authenticated user in your controllers.
+3. **Input Validation:** Laravel's default exception handler has been globally overridden. When you use `$request->validate([...])`, a failure will automatically generate the strict `400 Bad Request` JSON structure (`{ "success": false, "errors": ... }`) required by Section 10. You do **not** need to manually format validation errors.
+4. **Test Users (RBAC):** When you run `artisan migrate --seed`, the database is populated with two default users so you can immediately test your endpoints:
+   - Admin: `admin@example.com` (Password: `password`, Role: `ADMIN`)
+   - Customer: `customer@example.com` (Password: `password`, Role: `CUSTOMER`)
+
 ## Agent Skills
 
 ### ASD-STE100 (Simplified Technical English)
