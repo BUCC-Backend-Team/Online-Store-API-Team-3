@@ -64,7 +64,7 @@ Follow these steps to start the project locally:
    ```
 2. **Install the Composer dependencies with a temporary Docker container:**
    ```bash
-   docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html laravelsail/php82-composer:latest composer install
+   docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html laravelsail/php84-composer:latest composer install
    ```
 3. **Prepare your environment variables:**
    ```bash
@@ -81,6 +81,10 @@ Follow these steps to start the project locally:
 6. **Run the database migrations:**
    ```bash
    ./vendor/bin/sail artisan migrate
+   ```
+7. **Generate the JWT secret key:**
+   ```bash
+   ./vendor/bin/sail artisan jwt:secret
    ```
 
 ## Agent Skills
