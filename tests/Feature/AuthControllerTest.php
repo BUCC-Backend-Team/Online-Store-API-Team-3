@@ -108,4 +108,15 @@ class AuthControllerTest extends TestCase
                      'message' => 'Successfully logged out'
                  ]);
     }
+
+    public function test_user_can_refresh_token(): void
+    {
+        $user = \App\Models\User::factory()->create();
+        $token = auth('api')->login($user);
+
+        $response = $this->withToken($token)->postJson('/api/v1/auth/refresh');
+
+        $response->assertStatus(200)
+                 ->assertJsonStructure(['success', 'token']);
+    }
 }
