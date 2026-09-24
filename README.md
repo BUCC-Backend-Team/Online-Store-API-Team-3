@@ -78,9 +78,9 @@ Follow these steps to start the project locally:
    ```bash
    ./vendor/bin/sail artisan key:generate
    ```
-6. **Run the database migrations:**
+6. **Run the database migrations and seed the test users:**
    ```bash
-   ./vendor/bin/sail artisan migrate
+   ./vendor/bin/sail artisan migrate --seed
    ```
 7. **Generate the JWT secret key:**
    ```bash
