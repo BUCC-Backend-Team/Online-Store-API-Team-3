@@ -31,4 +31,24 @@ class AuthController extends Controller
             'user' => $user
         ], 201);
     }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
+
+        if (! $token = auth('api')->attempt($credentials)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid credentials'
+            ], 401); // 401 Unauthorized per PDF Section 8
+        }
+
+        return response()->json([
+            'success' => true,
+            'token' => $token,
+        ]);
+    }
 }

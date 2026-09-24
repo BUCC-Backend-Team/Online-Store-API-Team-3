@@ -44,4 +44,37 @@ class AuthControllerTest extends TestCase
                      'errors' => ['name', 'email', 'password']
                  ]);
     }
+
+    public function test_user_can_login(): void
+    {
+        $user = \App\Models\User::factory()->create([
+            'password' => \Illuminate\Support\Facades\Hash::make('password123'),
+        ]);
+
+        $response = $this->postJson('/api/v1/auth/login', [
+            'email' => $user->email,
+            'password' => 'password123',
+        ]);
+
+        $response->assertStatus(200)
+                 ->assertJsonStructure(['success', 'token']);
+    }
+
+    public function test_user_cannot_login_with_invalid_credentials(): void
+    {
+        $user = \App\Models\User::factory()->create([
+            'password' => \Illuminate\Support\Facades\Hash::make('password123'),
+        ]);
+
+        $response = $this->postJson('/api/v1/auth/login', [
+            'email' => $user->email,
+            'password' => 'wrongpassword',
+        ]);
+
+        $response->assertStatus(401)
+                 ->assertJson([
+                     'success' => false,
+                     'message' => 'Invalid credentials'
+                 ]);
+    }
 }
