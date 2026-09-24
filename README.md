@@ -2,6 +2,11 @@
 
 This repository contains the monolithic backend REST API for an online store. We build it with **Laravel** and **PostgreSQL**.
 
+> [!NOTE]
+> **Active Development**
+> The repository's `main` branch contains the clean base scaffold.
+> We are currently actively developing the authentication flow on the `feature/auth` branch. If you are starting new work, please check with the team on which branch to base your work.
+
 ## Architecture and Technology Stack
 *   **Framework:** PHP / Laravel
 *   **Database:** PostgreSQL
